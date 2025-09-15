@@ -7,6 +7,19 @@ export class Order {
         this.state = new ActiveState();
         this.userId = user1.userId
         this.orderId = uuidv4();
+        this.history = [];
+    }
+
+    addHistory(status, action) {
+        this.history.push({
+            status,
+            action,
+            timestamp: new Date().toLocaleString()
+        })
+    }
+
+    getHistory() {
+        console.log(this.history)
     }
 
     pay() {
@@ -30,11 +43,13 @@ export class Order {
 class ActiveState {
     pay(order) {
         console.log('order has been paid for')
+        order.addHistory('paid', 'paid for order')
         order.setState(new PaidState());
     }
 
     cancel(order) {
         console.log('order has been cancelled')
+        order.addHistory('cancelled', 'order cancelled')
         order.setState(new CancelledState());
 
     }
@@ -51,11 +66,13 @@ class ActiveState {
 class PaidState {
     ship(order) {
         console.log('order has been shipped')
+        order.addHistory('shipped', 'order shipped')
         order.setState(new ShippedState())
     }
 
     cancel(order) {
         console.log('order has been cancelled')
+        order.addHistory('cancelled', 'order cancelled')
         order.setState(new CancelledState());
     }
 
@@ -71,6 +88,7 @@ class PaidState {
 class ShippedState {
     deliver(order) {
         console.log('order has been delivered')
+        order.addHistory('delivered', 'order delivered')
         order.setState(new DeliveredState());
     }
 
@@ -87,14 +105,7 @@ class ShippedState {
     }
 }
 
-class DeliveredState {
 
-}
-
-
-class CancelledState {
-
-}
 
 // const order1 = new Order();
 // order1.pay()

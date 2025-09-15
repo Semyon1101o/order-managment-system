@@ -6,7 +6,6 @@ export class User {
         this.name = name,
         this.balance = balance
         this.userId = uuidv4();
-        this.history = {};
     }
 
     createOrder() {
@@ -22,3 +21,4 @@ console.log(user1)
 console.log(order)
 order.pay()
 order.ship()
+order.getHistory()
