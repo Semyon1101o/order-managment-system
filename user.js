@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Order } from './order.js';
 
 export class User {
-    constructor(name, balance) {
+    constructor(name = 'user', balance = 15000) {
         this.name = name,
         this.balance = balance
         this.userId = uuidv4();
