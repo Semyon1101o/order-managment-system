@@ -3,12 +3,12 @@ import { user1 } from "./user.js";
 import _ from 'readline-sync';
 
 
-
-
 const rl = createInterface({
     input: process.stdin,
     output: process.stdout,
 });
+
+
 function createMenu() {
     console.log('menu:')
     console.log('create - create order')
@@ -22,10 +22,20 @@ function createMenu() {
 function handleChoice(choice) {
     switch(choice) {
         case 'create':
-            user1.createOrder()
+            const order = user1.createOrder();
             break
-
-
+        case 'pay':
+            order.pay()
+            break
+        case 'ship':
+            order.ship()
+            break
+        case 'deliver':
+            order.deliver()
+            break
+        case 'cancel':
+            order.cancel()
+            break
     }
 
 }
